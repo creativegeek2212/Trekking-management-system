@@ -1,0 +1,56 @@
+:root {
+  --page-bg: #f6f8f5;
+  --forest: #198754;
+  --ink: #1f2a24;
+}
+
+body {
+  background: var(--page-bg);
+  color: var(--ink);
+}
+
+.app-hero {
+  background: linear-gradient(110deg, #ffffff 0%, #eef7f1 100%);
+  border: 1px solid #dce9df;
+  border-radius: 8px;
+  padding: 42px;
+}
+
+.card,
+.stat-card {
+  border-radius: 8px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #e1e8e3;
+  padding: 18px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.04);
+}
+
+.mini-stat {
+  border: 1px solid #e1e8e3;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 700;
+  background: #fbfdfb;
+}
+
+.mini-stat span {
+  display: block;
+  color: #6c757d;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.table th {
+  color: #526058;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+@media (max-width: 576px) {
+  .app-hero {
+    padding: 24px;
+  }
+}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Booking History{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Booking History</h1>
+<div class="card shadow-sm">
+  <div class="table-responsive">
+    <table class="table align-middle mb-0">
+      <thead>
+        <tr><th>Booking ID</th><th>Trek</th><th>Difficulty</th><th>Dates</th><th>Booking Status</th><th>Trek Status</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+          <tr>
+            <td>{{ booking.id }}</td>
+            <td>{{ booking.trek_name }}<div class="small text-muted">{{ booking.location }}</div></td>
+            <td>{{ booking.difficulty }}</td>
+            <td>{{ booking.start_date }} to {{ booking.end_date }}</td>
+            <td><span class="badge text-bg-secondary">{{ booking.status }}</span></td>
+            <td>{{ booking.trek_status }}</td>
+            <td class="text-end">
+              {% if booking.status == "Booked" %}
+                <form method="post" action="{{ url_for('cancel_booking', booking_id=booking.id) }}">
+                  <button class="btn btn-sm btn-outline-danger" type="submit">Cancel</button>
+                </form>
+              {% endif %}
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="7" class="text-muted">No booking history yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

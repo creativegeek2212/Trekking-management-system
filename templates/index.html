@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Trekking Management{% endblock %}
+{% block content %}
+<section class="app-hero mb-4">
+  <div>
+    <p class="text-uppercase small fw-semibold text-success mb-2">Role based trekking operations</p>
+    <h1 class="display-6 fw-bold mb-3">Manage treks, staff approvals, bookings, and trekking history in one place.</h1>
+    <p class="lead mb-4">Admin controls the system, trek staff manage assigned routes, and trekkers book only open treks with available slots.</p>
+    <div class="d-flex gap-2 flex-wrap">
+      <a class="btn btn-success" href="{{ url_for('login') }}">Login</a>
+      <a class="btn btn-outline-success" href="{{ url_for('register_user') }}">Register as Trekker</a>
+      <a class="btn btn-outline-secondary" href="{{ url_for('register_staff') }}">Register as Staff</a>
+    </div>
+  </div>
+</section>
+
+<div class="row g-3">
+  <div class="col-lg-8">
+    <h2 class="h5 mb-3">Featured Open Treks</h2>
+    <div class="row g-3">
+      {% for trek in featured %}
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <span class="badge text-bg-success">{{ trek.difficulty }}</span>
+              <h3 class="h6 mt-3">{{ trek.name }}</h3>
+              <p class="small text-muted mb-2">{{ trek.location }} • {{ trek.duration_days }} days</p>
+              <p class="small mb-0">{{ trek.available_slots }} slots left</p>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <p class="text-muted">No open treks yet. Log in as admin to create one.</p>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card border-success h-100">
+      <div class="card-body">
+        <h2 class="h5">Demo Admin</h2>
+        <p class="small mb-1"><strong>Email:</strong> admin@trek.local</p>
+        <p class="small mb-0"><strong>Password:</strong> admin123</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

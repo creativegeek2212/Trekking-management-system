@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h1 class="h4 mb-3">Login</h1>
+        <form method="post">
+          <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" id="email" name="email" type="email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" id="password" name="password" type="password" required>
+          </div>
+          <button class="btn btn-success w-100" type="submit">Login</button>
+        </form>
+        <div class="small mt-3 d-flex justify-content-between">
+          <a href="{{ url_for('register_user') }}">Register as trekker</a>
+          <a href="{{ url_for('register_staff') }}">Register as staff</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

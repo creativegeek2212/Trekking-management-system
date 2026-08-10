@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Staff Dashboard{% endblock %}
+{% block content %}
+<h1 class="h3 mb-1">Staff Dashboard</h1>
+<p class="text-muted">Assigned treks and registered participants.</p>
+
+<div class="row g-3">
+  {% for trek in treks %}
+    <div class="col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start mb-2">
+            <div>
+              <h2 class="h5 mb-1">{{ trek.name }}</h2>
+              <div class="small text-muted">{{ trek.location }} • {{ trek.start_date }} to {{ trek.end_date }}</div>
+            </div>
+            <span class="badge text-bg-light border">{{ trek.status }}</span>
+          </div>
+          <p class="mb-2">{{ trek.description or "No description provided." }}</p>
+          <div class="row text-center g-2 mb-3">
+            <div class="col-4"><div class="mini-stat">{{ trek.difficulty }}<span>Difficulty</span></div></div>
+            <div class="col-4"><div class="mini-stat">{{ trek.available_slots }}<span>Available</span></div></div>
+            <div class="col-4"><div class="mini-stat">{{ trek.duration_days }}<span>Days</span></div></div>
+          </div>
+          <a class="btn btn-outline-success w-100" href="{{ url_for('staff_manage_trek', trek_id=trek.id) }}">Manage Trek</a>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="col-12">
+      <div class="card shadow-sm"><div class="card-body text-muted">No treks assigned yet.</div></div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

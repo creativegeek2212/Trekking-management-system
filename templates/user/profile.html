@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h1 class="h4 mb-3">Edit Profile</h1>
+        <form method="post">
+          <div class="mb-3">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-control" id="name" name="name" value="{{ current_user.name }}" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" id="email" value="{{ current_user.email }}" disabled>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="contact">Contact Details</label>
+            <input class="form-control" id="contact" name="contact" value="{{ current_user.contact or '' }}">
+          </div>
+          <button class="btn btn-success" type="submit">Save Profile</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

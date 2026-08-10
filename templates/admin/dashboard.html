@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h1 class="h3 mb-1">Admin Dashboard</h1>
+    <p class="text-muted mb-0">System overview and pending staff approvals.</p>
+  </div>
+  <a class="btn btn-success" href="{{ url_for('create_trek') }}">Create Trek</a>
+</div>
+
+<div class="row g-3 mb-4">
+  {% for label, value in {"Treks": stats.treks, "Users": stats.users, "Staff": stats.staff, "Bookings": stats.bookings}.items() %}
+    <div class="col-6 col-lg-3">
+      <div class="stat-card">
+        <div class="text-muted small">{{ label }}</div>
+        <div class="fs-3 fw-bold">{{ value }}</div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Pending Staff</h2>
+        {% for staff in pending_staff %}
+          <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+            <div>
+              <div class="fw-semibold">{{ staff.name }}</div>
+              <div class="small text-muted">{{ staff.email }}</div>
+            </div>
+            <form method="post" action="{{ url_for('update_user_status', user_id=staff.id) }}">
+              <input type="hidden" name="status" value="approved">
+              <button class="btn btn-sm btn-success" type="submit">Approve</button>
+            </form>
+          </div>
+        {% else %}
+          <p class="text-muted mb-0">No staff approvals waiting.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Recent Bookings</h2>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr><th>ID</th><th>User</th><th>Trek</th><th>Status</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+              {% for booking in recent_bookings %}
+                <tr>
+                  <td>{{ booking.id }}</td>
+                  <td>{{ booking.user_name }}</td>
+                  <td>{{ booking.trek_name }}</td>
+                  <td><span class="badge text-bg-secondary">{{ booking.status }}</span></td>
+                  <td>{{ booking.booking_date }}</td>
+                </tr>
+              {% else %}
+                <tr><td colspan="5" class="text-muted">No bookings yet.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
