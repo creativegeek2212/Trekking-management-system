@@ -44,6 +44,4 @@ On Windows, you can also run `start-app.bat` after installing requirements.
 
 The database is created automatically at `instance/trekking.db`.
 
-## Submission Note
 
-Do not include `.venv/`, `__pycache__/`, log files, or `instance/*.db` in the final zip. The app creates the SQLite database programmatically when it starts.
